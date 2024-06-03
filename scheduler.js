@@ -5,7 +5,7 @@ const { ApiUsage } = require('./db');
 const redisClient = require('./redisClient');
 const logger = require('./logger');
 
-const agenda = new Agenda({db: {address: 'mongodb+srv://aryankirsali:I@mgreat22@api-rate-limiter.dwqvoki.mongodb.net/?retryWrites=true&w=majority&appName=api-rate-limiter'}});
+const agenda = new Agenda({db: {address: 'mongodb+srv://aryankirsali:I%40mgreat22@api-rate-limiter.dwqvoki.mongodb.net/api-rate-limiter?retryWrites=true&w=majority'}});
 
 agenda.define('reset usage counters', async(job) => {
     try{

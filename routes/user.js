@@ -4,6 +4,7 @@ const { User, ApiUsage } = require('../db');
 const logger = require('../logger');
 const router = express.Router();
 
+// Register User
 router.post('/users', async(req, res) => {
     try{
         const apiKey = uuidv4();
@@ -19,5 +20,16 @@ router.post('/users', async(req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// Fetch all users
+router.get('/users', async (req, res) => {
+    try {
+      const users = await User.find({});
+      res.json(users);
+    } catch (err) {
+      logger.error('Error fetching users', err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 module.exports = router;

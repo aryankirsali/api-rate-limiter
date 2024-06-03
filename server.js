@@ -3,8 +3,8 @@ const http = require('http');
 const userRoutes = require('./routes/user');
 const usageRoutes = require('./routes/usage');
 const rateLimiter = require('./middleware/rateLimiter');
-const scheduler = require('./scheduler');
 const logger = require('./logger');
+require('./scheduler');
 
 const app = express();
 const server = http.createServer(app);

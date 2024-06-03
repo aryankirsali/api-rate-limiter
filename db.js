@@ -1,18 +1,23 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://aryankirsali:I@mgreat22@api-rate-limiter.dwqvoki.mongodb.net/?retryWrites=true&w=majority&appName=api-rate-limiter', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+const logger = require('./logger');
+
+const mongoURI = 'mongodb+srv://aryankirsali:I%40mgreat22@api-rate-limiter.dwqvoki.mongodb.net/api-rate-limiter?retryWrites=true&w=majority';
+mongoose.connect(mongoURI).then(() => {
+    logger.info('MongoDB connected');
+})
+    .catch((err) => {
+        logger.error('MongoDB connection error', err);
+    });
 
 const UserSchema = new mongoose.Schema({
     userName: String,
     apiKey: String,
-    createdAt: {type: Date, default: Date.now()},
+    createdAt: { type: Date, default: Date.now() },
 });
 
 const ApiUsageSchema = new mongoose.Schema({
     apiKey: String,
-    count: {type: Number, default: 0},
+    count: { type: Number, default: 0 },
     resetAt: Date,
 });
 
